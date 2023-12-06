@@ -81,14 +81,11 @@ Future improvements:
 I did not reach my stretch goal of a rust glsl auto parser because I got stuck with my shaders not rendering correctly because of small differences in the way values are passed through the shader in rust due to its very different syntax and structure from other languages.  I may have implemented them by the time the assignment is graded though. 
 
 Usage example:
-use rustshader::{Shader, SimpleTest};
 
-fn main() {
+    fn main() {
     let (width, height) = (800, 600); // Set resolution
+    //use either the existing image library for the project or your own.  Create image. 
     let mut shader = SimpleTest::new((width, height)); // Choose a shader from the shaders folder and create it with the resolution
-
-//use either the existing image library for the project or your own.  Create image. 
-
     for y in 0..height {
         for x in 0..width {
             let frag_coords = types::Vec2::new((x as f32 / width as f32, y as f32 / height as f32));
@@ -96,9 +93,9 @@ fn main() {
             // Process and set the pixel value at the position in the image (width/height)
         }
     }
-//save your image here.
+    //save your image here.
 
-}
+    }
 
 
 
