@@ -29,10 +29,10 @@ The library will calculate texture coordinates for each pixel in an empty
 image, using its x and y integers and a projection matrix. These coordinates will be fed through 
 the shader written by the user.
 
-Multithreading: 
+Multithreading(Stretch goal): 
 
 I will use multithreading to handle multiple pixels at the same time and speed 
-up image rendering. 
+up image rendering. Not yet implemented.
 
 Writing Shaders in Rust: 
 
@@ -54,3 +54,50 @@ Converting GLSL to Rust:
 GLSL functions are very simple because they do very simple tasks (like 
 mixing colors) so it shouldn’t be hard to replicate them in Rust. The automatic parsing of glsl 
 might be hard because I have never written a parser before so I am setting that as a stretch goal.
+
+How It Works:
+
+Input Shaders: Users can input pixel shaders written in Rust, utilizing functions similar to GLSL (e.g., mix, dot, clamp).
+
+CPU Rendering: RustShader calculates texture coordinates for each pixel in an empty image, using integer values for pixels and a frag coord calculated from them. These coordinates are then processed through the user-provided shader. More advanced shaders could use projection matrixes. 
+
+Building and Running the Project:
+To build and run the project, follow these steps:
+
+Clone the RustShader repository.
+
+Navigate to the project directory.
+
+Modify or create your custom shaders in Rust, using my provided GLSL-like functions found in types.rs.
+
+Run the project using cargo run to execute the shader rendering process.
+
+Testing and issues Encountered:
+Testing had to be done manually in most cases because of the very arbitrary values involved in the calculations of thousands of pixels that make up the images.  I did some testing on the Rust GLSL functions to make sure they produced the right values but the main issues seemed to be how they passed and combined values due to the very different syntax of rust and other langauges. 
+
+Future improvements:
+I did not reach my stretch goal of a rust glsl auto parser because I got stuck with my shaders not rendering correctly because of small differences in the way values are passed through the shader in rust due to its very different syntax and structure from other languages.  I may have implemented them by the time the assignment is graded though. 
+
+Usage example:
+use rustshader::{Shader, SimpleTest};
+
+fn main() {
+    let (width, height) = (800, 600); // Set resolution
+    let mut shader = SimpleTest::new((width, height)); // Choose a shader from the shaders folder and create it with the resolution
+
+//use either the existing image library for the project or your own.  Create image. 
+
+    for y in 0..height {
+        for x in 0..width {
+            let frag_coords = types::Vec2::new((x as f32 / width as f32, y as f32 / height as f32));
+            let color = shader.main(frag_coords, None); // Execute shader
+            // Process and set the pixel value at the position in the image (width/height)
+        }
+    }
+//save your image here.
+
+}
+
+
+
+
