@@ -4,20 +4,17 @@ use image::{ImageBuffer, Rgb};
 mod shader;
 mod types;
 mod shaders {
-    pub mod flame_test;
     pub mod simple_test;
 }
 
 use shader::*;
-use shaders::flame_test::*;
 use shaders::simple_test::*;
-use types::*;
 
 fn main() {
-    let (width, height) = (600, 600); 
+    let (width, height) = (2000, 2000); 
     let mut img = ImageBuffer::new(width, height);
 
-    let mut shader1 = SimpleTest::new((width, height));
+    let shader1 = SimpleTest::new((width, height));
 
     for y in 0..height {
         for x in 0..width {

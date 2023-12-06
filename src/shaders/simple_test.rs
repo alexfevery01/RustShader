@@ -1,7 +1,6 @@
 use crate::shader::Shader;
 use crate::shader::ShaderBase;
 use crate::types::*;
-use std::f32::consts::PI;
 
 pub struct SimpleTest {
     pub base: ShaderBase,
@@ -19,16 +18,10 @@ impl SimpleTest {
             block_width: 0.01,
         };
         shader.base.set_resolution(width, height);
+		shader.base.set_game_time(1.0);
         shader
     }
 
-    fn step(&self, edge: f32, x: f32) -> f32 {
-        if x < edge {
-            0.0
-        } else {
-            1.0
-        }
-    }
 }
 
 impl Shader for SimpleTest {
@@ -44,8 +37,8 @@ impl Shader for SimpleTest {
         let color2 = Vec3::new((0.5, 0.0, 0.0));
         let block_width = 0.01;
 
-        let mut c1 = (uv.x % (2.0 * block_width)) >= block_width;
-        let mut c2 = (uv.y % (2.0 * block_width)) >= block_width;
+        let c1 = (uv.x % (2.0 * block_width)) >= block_width;
+        let c2 = (uv.y % (2.0 * block_width)) >= block_width;
 
         let bg_color = Vec3::mix(
             uv.x * color1,

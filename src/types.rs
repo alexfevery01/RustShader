@@ -1,5 +1,4 @@
-use std::f32::consts::PI;
-use std::ops::{Add, AddAssign, Div, Mul, Sub};
+use std::ops::{Add, AddAssign, Div, Mul, Sub,Index, IndexMut};
 
 #[derive(PartialEq, Debug, Copy, Clone)]
 pub struct Vec2 {
@@ -36,6 +35,10 @@ impl Vec2 {
     pub fn set_yx(&mut self, value: Vec2) {
         self.x = value.y;
         self.y = value.x;
+    }
+
+	 pub fn zero() -> Vec2 {
+        Vec2 { x: 0.0, y: 0.0 }
     }
 
     // Sin operation
@@ -88,6 +91,28 @@ impl Vec2 {
     // fract operation to get the fractional part of a number
     pub fn fract(&self) -> Vec2 {
         Vec2::new((self.x.fract(), self.y.fract()))
+    }
+}
+
+impl Index<usize> for Vec2 {
+    type Output = f32;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        match index {
+            0 => &self.x,
+            1 => &self.y,
+            _ => panic!("Index out of bounds"),
+        }
+    }
+}
+
+impl IndexMut<usize> for Vec2 {
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        match index {
+            0 => &mut self.x,
+            1 => &mut self.y,
+            _ => panic!("Index out of bounds"),
+        }
     }
 }
 
@@ -204,6 +229,10 @@ impl Vec3 {
         self.z = value.z;
     }
 
+	pub fn zero() -> Vec3 {
+        Vec3 { x: 0.0, y: 0.0, z: 0.0 }
+    }
+
     pub fn sin(&self) -> Vec3 {
         Vec3::new((self.x.sin(), self.y.sin(), self.z.sin()))
     }
@@ -277,6 +306,32 @@ impl Vec3 {
         }
     }
 }
+
+impl Index<usize> for Vec3 {
+    type Output = f32;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        match index {
+            0 => &self.x,
+            1 => &self.y,
+            2 => &self.z,
+            _ => panic!("Index out of bounds"),
+        }
+    }
+}
+
+impl IndexMut<usize> for Vec3 {
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        match index {
+            0 => &mut self.x,
+            1 => &mut self.y,
+            2 => &mut self.z,
+            _ => panic!("Index out of bounds"),
+        }
+    }
+}
+
+
 
 impl Add for Vec3 {
     type Output = Vec3;
@@ -407,6 +462,19 @@ impl Vec4 {
         Vec2::new((self.z, self.w))
     }
 
+	 pub fn zero() -> Vec4 {
+        Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 }
+    }
+
+    pub fn fract(&self) -> Vec4 {
+        Vec4 {
+            x: self.x.fract(),
+            y: self.y.fract(),
+            z: self.z.fract(),
+            w: self.w.fract(),
+        }
+    }
+
     pub fn dot(a: &Vec4, b: &Vec4) -> f32 {
         a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w
     }
@@ -428,6 +496,33 @@ impl Vec4 {
         ))
     }
 }
+
+impl Index<usize> for Vec4 {
+    type Output = f32;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        match index {
+            0 => &self.x,
+            1 => &self.y,
+            2 => &self.z,
+            3 => &self.w,
+            _ => panic!("Index out of bounds"),
+        }
+    }
+}
+
+impl IndexMut<usize> for Vec4 {
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        match index {
+            0 => &mut self.x,
+            1 => &mut self.y,
+            2 => &mut self.z,
+            3 => &mut self.w,
+            _ => panic!("Index out of bounds"),
+        }
+    }
+}
+
 
 impl Add for Vec4 {
     type Output = Vec4;
