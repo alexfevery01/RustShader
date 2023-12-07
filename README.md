@@ -68,11 +68,11 @@ Clone the RustShader repository.
 
 Navigate to the project directory.
 
-Modify or create your custom shaders in Rust, using my provided GLSL-like functions found in types.rs.
+Open a terminal and use "cargo build" to build the project
 
-Run the project using cargo run to execute the shader rendering process.
+Run the project using "cargo run" to execute the shader rendering process.
 
-Use cargo test to run the tests to check the glsl conversions. 
+Use "cargo test" to run the tests to check the glsl conversions.
 
 Testing and issues Encountered:
 Testing had to be done manually in most cases because of the very arbitrary values involved in the calculations of thousands of pixels that make up the images.  I did some testing on the Rust GLSL functions to make sure they produced the right values but the main issues seemed to be how they passed and combined values due to the very different syntax of rust and other langauges. 
