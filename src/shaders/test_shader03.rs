@@ -54,10 +54,7 @@ impl Shader for TestShader03 {
                 ));
             }
         }
-
-        // Convert the Vec4 color to Vec3 by discarding the alpha channel
         let col3 = Vec3::new((col.x, col.y, col.z));
-
         col3
     }
 }
