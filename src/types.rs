@@ -1,4 +1,4 @@
-use std::ops::{Add, AddAssign, Div, Mul, Sub,Index, IndexMut};
+use std::ops::{Add, AddAssign, Div, Index, IndexMut, Mul, Sub};
 
 #[derive(PartialEq, Debug, Copy, Clone)]
 pub struct Vec2 {
@@ -37,7 +37,7 @@ impl Vec2 {
         self.y = value.x;
     }
 
-	 pub fn zero() -> Vec2 {
+    pub fn zero() -> Vec2 {
         Vec2 { x: 0.0, y: 0.0 }
     }
 
@@ -46,7 +46,7 @@ impl Vec2 {
         Vec2::new((self.x.sin(), self.y.sin()))
     }
 
-	pub fn abs(&self) -> Self {
+    pub fn abs(&self) -> Self {
         Vec2::new((self.x.abs(), self.y.abs()))
     }
 
@@ -229,8 +229,16 @@ impl Vec3 {
         self.z = value.z;
     }
 
-	pub fn zero() -> Vec3 {
-        Vec3 { x: 0.0, y: 0.0, z: 0.0 }
+    pub fn zero() -> Vec3 {
+        Vec3 {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+        }
+    }
+
+    pub fn abs(&self) -> Self {
+        Vec3::new((self.x.abs(), self.y.abs(), self.z.abs()))
     }
 
     pub fn sin(&self) -> Vec3 {
@@ -330,8 +338,6 @@ impl IndexMut<usize> for Vec3 {
         }
     }
 }
-
-
 
 impl Add for Vec3 {
     type Output = Vec3;
@@ -462,8 +468,17 @@ impl Vec4 {
         Vec2::new((self.z, self.w))
     }
 
-	 pub fn zero() -> Vec4 {
-        Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 }
+    pub fn zero() -> Vec4 {
+        Vec4 {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            w: 0.0,
+        }
+    }
+
+    pub fn abs(&self) -> Self {
+        Vec4::new((self.x.abs(), self.y.abs(), self.z.abs(), self.w.abs()))
     }
 
     pub fn fract(&self) -> Vec4 {
@@ -522,7 +537,6 @@ impl IndexMut<usize> for Vec4 {
         }
     }
 }
-
 
 impl Add for Vec4 {
     type Output = Vec4;

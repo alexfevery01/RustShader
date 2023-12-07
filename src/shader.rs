@@ -25,4 +25,5 @@ impl ShaderBase {
 pub trait Shader {
     fn base(&mut self) -> &mut ShaderBase;
     fn main(&self, frag_coords: Vec2, tex_coords: Option<Vec2>) -> Vec3;
+    fn set_game_time(&mut self, game_time: f32);
 }
