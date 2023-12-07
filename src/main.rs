@@ -16,16 +16,18 @@ mod types;
 mod shaders {
     pub mod test_shader01;
     pub mod test_shader02;
+    pub mod test_shader03;
 }
 
 use shader::*;
 use shaders::test_shader01::*;
 use shaders::test_shader02::*;
+use shaders::test_shader03::*;
 
 fn main() {
     let output_file = std::fs::File::create("shaderoutput.gif").unwrap();
 
-    let shaders = vec!["TestShader01", "TestShader02"];
+    let shaders = vec!["TestShader01", "TestShader02", "TestShader03"];
     let resolutions = vec!["4K", "1440p", "1080p", "720p", "480p", "360p", "240p"];
     let timestep_options = vec![".001 second", ".01 second", ".1 second"];
     let frames_options = vec![
@@ -69,6 +71,7 @@ fn main() {
     let mut shader: Box<dyn Shader> = match selected_shader {
         0 => Box::new(TestShader01::new((width, height))),
         1 => Box::new(TestShader02::new((width, height))),
+        2 => Box::new(TestShader03::new((width, height))),
         _ => panic!("Invalid shader selected"),
     };
 
